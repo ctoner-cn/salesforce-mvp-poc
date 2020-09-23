@@ -1,0 +1,36 @@
+#%RAML 1.0
+# The title field should have a meaningful short name of the API. For example: Roles and Users API, Documents API, Calendar API
+title: Conde Nast Britain DWH System API
+
+# The description field should have a description of the API. This description will appear in the API specification published in exchange
+description: "cn-britain-dwh-sapi System API for creating and modifying data within the Conde Nast UK DWH"
+
+# The version field should contain the API version in major.minor version format prefixed with "v". For example: v1.0, v3.4 etc
+version: v1.0
+
+# The mediaType should be application/json by default, however XML or other formats can be supported depending on the use case
+mediaType: application/json
+
+# The protocol should always be HTTPS for RESTful APIs
+protocols: [ HTTPS ]
+
+types:
+  Account: !include types/account.raml
+
+/accounts:
+  put:
+    description: Update an existing record within the UK DWH
+    body:
+      type: Account
+      example: !include examples/account-example.raml
+    responses:
+      204: 
+        description: "HTTP 204 - No Content"
+  post:
+    description: Create a new record within the UK DWH
+    body:
+      type: Account
+      example: !include examples/account-example.raml
+    responses:
+      201:
+        description: "HTTP 201 - Created"

@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Account" format="json">
+      <types:shape format="weave" example="examples/salesforce-input-example.json"><![CDATA[%dw 2.0
+
+type Account = {|
+  ShippingLatitude: Null, 
+  LastModifiedDate: String, 
+  VAT_Status__c: String, 
+  Discount_Percent__c: String, 
+  Parent_Customer__c: String, 
+  "type": String, 
+  Terms_of_Payment__c: Null, 
+  AccountSource: Null, 
+  Contract_Ratecard__c: Null, 
+  Pay_Cash__c: String, 
+  PhotoUrl: String, 
+  Client_Business_Group__c: Null, 
+  Diff__c: Null, 
+  IsDeleted: String, 
+  Search_term_1__c: Null, 
+  Requires_Parent_Customer__c: String, 
+  Key_Account__c: String, 
+  APS_ID__c: Null, 
+  Publisher__c: Null, 
+  House_Number__c: Null, 
+  No_Orders__c: String, 
+  BillingStateCode: Null, 
+  ShippingPostalCode: Null, 
+  ShippingState: Null, 
+  Property__c: Null, 
+  Id: String, 
+  Publisher_Group__c: Null, 
+  AnnualRevenue: Null, 
+  Jigsaw: Null, 
+  Active__c: Null, 
+  House_Number_Supplement__c: Null, 
+  Site: Null, 
+  VAT_ID_Number__c: Null, 
+  Description: Null, 
+  Office__c: Null, 
+  Website: Null, 
+  BillingLatitude: Null, 
+  NumberOfEmployees: Null, 
+  BillingAddress: Null, 
+  Last_Modified_By_Name__c: String, 
+  OwnerId: String, 
+  BillingLongitude: Null, 
+  Account_Name_3__c: Null, 
+  UpsellOpportunity__c: Null, 
+  RecordTypeId: String, 
+  ShippingCity: Null, 
+  Invoice_Language__c: Null, 
+  Billing_Currencies__c: Null, 
+  ParentId: Null, 
+  Barter_House_Billing_Days_Offset__c: String, 
+  PO_Box_City__c: Null, 
+  PO_Box_Postal_Code__c: Null, 
+  Credit_Limit__c: Null, 
+  Magazine_Business_Groups__c: Null, 
+  SystemModstamp: String, 
+  Related_Publisher_Accounts__c: Null, 
+  Type: Null, 
+  BillingCountry: Null, 
+  SLAExpirationDate__c: Null, 
+  Motors__c: Null, 
+  Payment_Type__c: Null, 
+  LastActivityDate: Null, 
+  PO_Box__c: Null, 
+  ShippingLongitude: Null, 
+  ShippingStateCode: Null, 
+  BillingCity: Null, 
+  Account_Type__c: String, 
+  JigsawCompanyId: Null, 
+  SLA__c: Null, 
+  Charity_Number__c: Null, 
+  Name: String, 
+  Agency_Network__c: Null, 
+  Industry: String, 
+  Account_Name_1__c: Null, 
+  CreatedById: String, 
+  TickerSymbol: Null, 
+  Customer_Type__c: String, 
+  BillingGeocodeAccuracy: Null, 
+  BillingPostalCode: Null, 
+  MasterRecordId: Null, 
+  Wholesaler_Account__c: String, 
+  External_UID__c: Null, 
+  Is_Data_Provider__c: String, 
+  LastViewedDate: String, 
+  Block_Orders__c: String, 
+  Display_Business_Group__c: Null, 
+  ShippingGeocodeAccuracy: Null, 
+  Has_Barter__c: String, 
+  Sic: Null, 
+  CurrencyIsoCode: String, 
+  Charity__c: String, 
+  Created_By_Name__c: String, 
+  Do_Not_Include_On_Reports__c: String, 
+  ShippingStreet: Null, 
+  Recruitment_BG__c: Null, 
+  CreatedDate: String, 
+  Account_Name_4__c: Null, 
+  Agency_Business_Groups__c: Null, 
+  CustomerPriority__c: Null, 
+  SicDesc: Null, 
+  Display_Name__c: Null, 
+  Tax_Registration__c: Null, 
+  BillingState: Null, 
+  Email__c: Null, 
+  Parent_Network__c: Null, 
+  Ownership: Null, 
+  Nielsen_Account_Code__c: Null, 
+  Rating: Null, 
+  BillingCountryCode: Null, 
+  Printer_Account__c: String, 
+  LastReferencedDate: String, 
+  Account_Status__c: String, 
+  County__c: Null, 
+  Holidays__c: Null, 
+  Customer_status__c: String, 
+  Business__c: Null, 
+  SLASerialNumber__c: Null, 
+  Phone: Null, 
+  NumberofLocations__c: Null, 
+  ShippingCountry: Null, 
+  Business_Group_Region__c: Null, 
+  Amount_Outstanding__c: Null, 
+  Has_Spend_Guarantee_Agreement__c: String, 
+  Is_Tech_Provider__c: String, 
+  Billing_Days_Offset__c: String, 
+  Distributor_Account__c: String, 
+  ShippingCountryCode: Null, 
+  AccountNumber: Null, 
+  Has_Parent_Customer__c: String, 
+  BillingStreet: Null, 
+  Account_Name_2__c: Null, 
+  DFP_Id__c: Null, 
+  ShippingAddress: Null, 
+  Job_Function__c: Null, 
+  Fax: Null, 
+  LastModifiedById: String
+|} {"example": "{\\\"ShippingLatitude\\\":null,\\\"LastModifiedDate\\\":\\\"2020-09-22T15:44:16.000Z\\\",\\\"VAT_Status__c\\\":\\\"Normal\\\",\\\"Discount_Percent__c\\\":\\\"0\\\",\\\"Parent_Customer__c\\\":\\\"false\\\",\\\"type\\\":\\\"Account\\\",\\\"Terms_of_Payment__c\\\":null,\\\"AccountSource\\\":null,\\\"Contract_Ratecard__c\\\":null,\\\"Pay_Cash__c\\\":\\\"false\\\",\\\"PhotoUrl\\\":\\\"\\/services\\/images\\/photo\\/0013H000005AVHBQA4\\\",\\\"Client_Business_Group__c\\\":null,\\\"Diff__c\\\":null,\\\"IsDeleted\\\":\\\"false\\\",\\\"Search_term_1__c\\\":null,\\\"Requires_Parent_Customer__c\\\":\\\"false\\\",\\\"Key_Account__c\\\":\\\"false\\\",\\\"APS_ID__c\\\":null,\\\"Publisher__c\\\":null,\\\"House_Number__c\\\":null,\\\"No_Orders__c\\\":\\\"false\\\",\\\"BillingStateCode\\\":null,\\\"ShippingPostalCode\\\":null,\\\"ShippingState\\\":null,\\\"Property__c\\\":null,\\\"Id\\\":\\\"0013H000005AVHBQA4\\\",\\\"Publisher_Group__c\\\":null,\\\"AnnualRevenue\\\":null,\\\"Jigsaw\\\":null,\\\"Active__c\\\":null,\\\"House_Number_Supplement__c\\\":null,\\\"Site\\\":null,\\\"VAT_ID_Number__c\\\":null,\\\"Description\\\":null,\\\"Office__c\\\":null,\\\"Website\\\":null,\\\"BillingLatitude\\\":null,\\\"NumberOfEmployees\\\":null,\\\"BillingAddress\\\":null,\\\"Last_Modified_By_Name__c\\\":\\\"<a href=\\\\\\\"0053H000000nInZ\\\\\\\" target=\\\\\\\"_blank\\\\\\\">Caitlin Toner<\\/a>\\\",\\\"OwnerId\\\":\\\"0053H000000nInZQAU\\\",\\\"BillingLongitude\\\":null,\\\"Account_Name_3__c\\\":null,\\\"UpsellOpportunity__c\\\":null,\\\"RecordTypeId\\\":\\\"0121r000000N477AAC\\\",\\\"ShippingCity\\\":null,\\\"Invoice_Language__c\\\":null,\\\"Billing_Currencies__c\\\":null,\\\"ParentId\\\":null,\\\"Barter_House_Billing_Days_Offset__c\\\":\\\"0.0\\\",\\\"PO_Box_City__c\\\":null,\\\"PO_Box_Postal_Code__c\\\":null,\\\"Credit_Limit__c\\\":null,\\\"Magazine_Business_Groups__c\\\":null,\\\"SystemModstamp\\\":\\\"2020-09-22T15:44:16.000Z\\\",\\\"Related_Publisher_Accounts__c\\\":null,\\\"Type\\\":null,\\\"BillingCountry\\\":null,\\\"SLAExpirationDate__c\\\":null,\\\"Motors__c\\\":null,\\\"Payment_Type__c\\\":null,\\\"LastActivityDate\\\":null,\\\"PO_Box__c\\\":null,\\\"ShippingLongitude\\\":null,\\\"ShippingStateCode\\\":null,\\\"BillingCity\\\":null,\\\"Account_Type__c\\\":\\\"Transient\\\",\\\"JigsawCompanyId\\\":null,\\\"SLA__c\\\":null,\\\"Charity_Number__c\\\":null,\\\"Name\\\":\\\"TestAccount9-Modified-Modified34\\\",\\\"Agency_Network__c\\\":null,\\\"Industry\\\":\\\"Beauty & Personal Care\\\",\\\"Account_Name_1__c\\\":null,\\\"CreatedById\\\":\\\"0053H000000nInZQAU\\\",\\\"TickerSymbol\\\":null,\\\"Customer_Type__c\\\":\\\"Agency\\\",\\\"BillingGeocodeAccuracy\\\":null,\\\"BillingPostalCode\\\":null,\\\"MasterRecordId\\\":null,\\\"Wholesaler_Account__c\\\":\\\"false\\\",\\\"External_UID__c\\\":null,\\\"Is_Data_Provider__c\\\":\\\"false\\\",\\\"LastViewedDate\\\":\\\"2020-09-22T15:44:16.000Z\\\",\\\"Block_Orders__c\\\":\\\"false\\\",\\\"Display_Business_Group__c\\\":null,\\\"ShippingGeocodeAccuracy\\\":null,\\\"Has_Barter__c\\\":\\\"false\\\",\\\"Sic\\\":null,\\\"CurrencyIsoCode\\\":\\\"GBP\\\",\\\"Charity__c\\\":\\\"false\\\",\\\"Created_By_Name__c\\\":\\\"<a href=\\\\\\\"0053H000000nInZ\\\\\\\" target=\\\\\\\"_blank\\\\\\\">Caitlin Toner<\\/a>\\\",\\\"Do_Not_Include_On_Reports__c\\\":\\\"false\\\",\\\"ShippingStreet\\\":null,\\\"Recruitment_BG__c\\\":null,\\\"CreatedDate\\\":\\\"2020-09-22T15:20:14.000Z\\\",\\\"Account_Name_4__c\\\":null,\\\"Agency_Business_Groups__c\\\":null,\\\"CustomerPriority__c\\\":null,\\\"SicDesc\\\":null,\\\"Display_Name__c\\\":null,\\\"Tax_Registration__c\\\":null,\\\"BillingState\\\":null,\\\"Email__c\\\":null,\\\"Parent_Network__c\\\":null,\\\"Ownership\\\":null,\\\"Nielsen_Account_Code__c\\\":null,\\\"Rating\\\":null,\\\"BillingCountryCode\\\":null,\\\"Printer_Account__c\\\":\\\"false\\\",\\\"LastReferencedDate\\\":\\\"2020-09-22T15:44:16.000Z\\\",\\\"Account_Status__c\\\":\\\"Pre Pay\\\",\\\"County__c\\\":null,\\\"Holidays__c\\\":null,\\\"Customer_status__c\\\":\\\"<img src=\\\\\\\"\\/resource\\/BGMBullets\\/GreenBullet.png\\\\\\\" alt=\\\\\\\"GREEN\\\\\\\" border=\\\\\\\"0\\\\\\\"\\/>\\\",\\\"Business__c\\\":null,\\\"SLASerialNumber__c\\\":null,\\\"Phone\\\":null,\\\"NumberofLocations__c\\\":null,\\\"ShippingCountry\\\":null,\\\"Business_Group_Region__c\\\":null,\\\"Amount_Outstanding__c\\\":null,\\\"Has_Spend_Guarantee_Agreement__c\\\":\\\"false\\\",\\\"Is_Tech_Provider__c\\\":\\\"false\\\",\\\"Billing_Days_Offset__c\\\":\\\"0.0\\\",\\\"Distributor_Account__c\\\":\\\"false\\\",\\\"ShippingCountryCode\\\":null,\\\"AccountNumber\\\":null,\\\"Has_Parent_Customer__c\\\":\\\"false\\\",\\\"BillingStreet\\\":null,\\\"Account_Name_2__c\\\":null,\\\"DFP_Id__c\\\":null,\\\"ShippingAddress\\\":null,\\\"Job_Function__c\\\":null,\\\"Fax\\\":null,\\\"LastModifiedById\\\":\\\"0053H000000nInZQAU\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#6e533c8b-3516-491f-8e42-fb691d61df5e">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="Account"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#6db4c6d9-7738-4530-bf7a-db6dde617d10">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="Account"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

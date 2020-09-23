@@ -1,0 +1,4 @@
+host: "cn-britain-uk-dwh-sapi.uk-e1.cloudhub.io"
+port: "80"
+protocol: "HTTP"
+basePath: "/api""

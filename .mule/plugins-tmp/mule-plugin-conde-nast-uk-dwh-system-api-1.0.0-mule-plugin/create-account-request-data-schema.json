@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/Account",
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "billingCity": {
+          "type": "string"
+        },
+        "billingCountry": {
+          "type": "string"
+        },
+        "billingCountryCode": {
+          "type": "string"
+        },
+        "billingPostalCode": {
+          "type": "string"
+        },
+        "billingState": {
+          "type": "string"
+        },
+        "billingStateCode": {
+          "type": "string"
+        },
+        "billingStreet": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

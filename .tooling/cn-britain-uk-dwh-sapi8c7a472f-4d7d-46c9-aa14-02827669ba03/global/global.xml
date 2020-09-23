@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:conde-nast-britain-dwh-system-api="http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api/current/mule-conde-nast-britain-dwh-system-api.xsd">
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="dc16e017-3a10-4022-a380-73d24d8f4998" >
+		<salesforce:oauth-user-pass-connection consumerKey="3MVG9Lf04EwncL7kzHpbn9XUvRxiSCA8iIPVDkvSmzlTkV_OYzTwnDtbl7QPOFqVmAPaLjL1PhQ==" consumerSecret="5F4CA60E39069C3CCF34FFBC93FA41B23AD95F2C128275BB5C1018019B1C9F5A" username="caitlin.toner@condenast.com.mulesoft" password="Password123" securityToken="0qOhumpOP8PGJvcT43vOil2F" tokenEndpoint="https://test.salesforce.com/services/oauth2/token" />
+	</salesforce:sfdc-config>
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="d2d95b9e-039f-463a-aa72-969a5123d6ea" applicationName="${application.name}" applicationVersion="${application.version}" environment="${mule.env}" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="2bcfec30-c87b-4845-9a7b-bc2c9f0f4344" >
+		<db:oracle-connection host="172.16.100.108" user="MulesoftGA" password="MulesoftGA123$" serviceName="CNPUATW"/>
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="ebf3825b-ceb7-4870-95c8-2dcddcb024fd" file="properties/properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="fc71f9c6-e001-4903-8da5-d92b54eb9b77" name="mule.env" value="prototype" />
+	</mule>

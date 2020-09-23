@@ -1,0 +1,9 @@
+EXTERNAL_IDENTITY_BUSINESS_ORG=condenast-mule
+USES_EXTERNAL_IDENTITY=true
+authenticated.users=[{"id"\:"dfcc8a2a-1928-406c-b481-61faacc39344","token"\:"7c51d09b-484c-4108-bde9-d0dda773a4ca","userId"\:"caitlin.toner@condenast.com","email"\:"caitlin.toner@condenast.com","refreshToken"\:"","baseUrl"\:"https\://anypoint.mulesoft.com/","org"\:{"name"\:"Cond\u00E9 Nast","id"\:"f43cf2cf-d84b-42e3-964b-97602f57177d","isMaster"\:true}}]
+current.token=7c51d09b-484c-4108-bde9-d0dda773a4ca
+current.user=caitlin.toner@condenast.com
+eclipse.preferences.version=1
+expiration.time=7
+org.mule.tooling.amc.apps={"userProjectMap"\:{"caitlin.toner@condenast.com"\:{"cn-britain-uk-dwh-sapi"\:"{\\"applicationName\\"\:\\"cn-britain-uk-dwh-sapi\\",\\"muleRuntime\\"\:\\"4.3.0\\",\\"properties\\"\:{\\"mule.env\\"\:\\"prototype\\"}}","cn-salesforce-account-eapi"\:"{\\"applicationName\\"\:\\"cn-salesforce-account-eapi\\",\\"muleRuntime\\"\:\\"4.3.0\\",\\"properties\\"\:{\\"anypoint.platform.config.analytics.agent.enabled\\"\:\\"false\\",\\"mule.env\\"\:\\"protoype\\"}}"}}}
+org.mule.tooling.ui.properties.enable.api.dependencies=true

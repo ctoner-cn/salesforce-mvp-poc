@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<sub-flow name="createNewRecordFlow" doc:id="aadb92ca-419e-4dbc-8b13-3a51232d282f" >
+		<json-logger:logger doc:name="Logger" doc:id="4b10cfee-d44c-4a24-8883-a2fa0360e02a" config-ref="JSON_Logger_Config" message="Entering createNewRecordFlow"/>
+		<ee:transform doc:name="Transform Message to Oracle format" doc:id="6e533c8b-3516-491f-8e42-fb691d61df5e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+fun convertToOracleTimestamp(d: DateTime|Null) = if (d == null) (null) else (d as String {
+	format: "yyyy-MM-dd HH:mm:ss.SSS"
+})
+---
+{
+	AccountStatus1C: payload.AccountStatus1C,
+	Address: payload.Address,
+	AddressPostalCode: payload.AddressPostalCode,
+	BillingCity: payload.BillingCity,
+	BillingCountry: payload.BillingCountry,
+	BillingCountryCode: payload.BillingCountryCode,
+	BillingPostalCode: payload.BillingPostalCode,
+	BillingState: payload.BillingState,
+	BillingStateCode: payload.BillingStateCode,
+	BillingStreet: payload.BillingStreet,
+	CharityNumberC: payload.CharityNumberC,
+	ClientBusinessGroupC: payload.ClientBusinessGroupC,
+	CreatedById: payload.CreatedById,
+	CreatedDate: convertToOracleTimestamp(payload.CreatedDate),
+	CurrencyIsoCode: payload.CurrencyIsoCode,
+	Id: payload.Id,
+	Industry: payload.Industry,
+	LastActivityDate: payload.LastActivityDate,
+	LastModifiedById: payload.LastModifiedById,
+	LastModifiedDate: convertToOracleTimestamp(payload.LastModifiedDate),
+	LastReferencedDate: convertToOracleTimestamp(payload.LastReferencedDate),
+	LastViewedDate: convertToOracleTimestamp(payload.LastViewedDate),
+	Name: payload.Name,
+	OwnerId: payload.OwnerId,
+	ParentId: payload.ParentId,
+	Phone: payload.Phone,
+	PhotoUrl: payload.PhotoUrl,
+	RecordTypeId: payload.RecordTypeId,
+	ShippingCity: payload.ShippingCity,
+	ShippingCountry: payload.ShippingCountry,
+	ShippingPostalCode: payload.ShippingPostalCode,
+	ShippingState: payload.ShippingState,
+	ShippingStreet: payload.ShippingStreet,
+	SystemModstamp: convertToOracleTimestamp(payload.SystemModstamp),
+	VATIDNumberC: payload.VATIDNumberC,
+	Website: payload.Website
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Logger" doc:id="7288e06e-26c5-439b-8e9a-98b766c6e3fb" config-ref="JSON_Logger_Config" message="Salesforce Account payload transformed to database-friendly format"/>
+		<db:insert doc:name="Insert record into database" doc:id="bf186605-682c-44dd-a9e5-fa9e28134a8a" config-ref="Database_Config">
+			<db:sql ><![CDATA[INSERT INTO ATLAS_ACCOUNT
+(ACCOUNT_STATUS1_C, ADDRESS, ADDRESS_POSTAL_CODE, BILLING_CITY, BILLING_COUNTRY, BILLING_COUNTRY_CODE, BILLING_POSTAL_CODE, BILLING_STATE, BILLING_STATE_CODE, BILLING_STREET, CHARITY_NUMBER_C, CLIENT_BUSINESS_GROUP_C, CREATED_BY_ID, CREATED_DATE, CURRENCY_ISO_CODE, ID, INDUSTRY, LAST_ACTIVITY_DATE, LAST_MODIFIED_BY_ID, LAST_MODIFIED_DATE, LAST_REFERENCED_DATE, LAST_VIEWED_DATE, NAME, OWNER_ID, PARENT_ID, PHONE, PHOTO_URL, RECORD_TYPE_ID, SHIPPING_CITY, SHIPPING_COUNTRY, SHIPPING_POSTAL_CODE, SHIPPING_STATE, SHIPPING_STREET, SYSTEM_MODSTAMP, VAT_ID_NUMBER_C, WEBSITE)
+VALUES
+(:AccountStatus1C, :Address, :AddressPostalCode, :BillingCity, :BillingCountry, :BillingCountryCode, :BillingPostalCode, :BillingState, :BillingStateCode, :BillingStreet, :CharityNumberC, :ClientBusinessGroupC, :CreatedById, :CreatedDate, :CurrencyIsoCode, :Id, :Industry, :LastActivityDate, :LastModifiedById, :LastModifiedDate, :LastReferencedDate, :LastViewedDate, :Name, :OwnerId, :ParentId, :Phone, :PhotoUrl, :RecordTypeId, :ShippingCity, :ShippingCountry, :ShippingPostalCode, :ShippingState, :ShippingStreet, :SystemModstamp, :VATIDNumberC, :Website)]]></db:sql>
+			<db:input-parameters ><![CDATA[#[payload]]]></db:input-parameters>
+		</db:insert>
+		<json-logger:logger doc:name="Logger" doc:id="00fe266b-84ce-484e-b6f5-70aba5c0ff6b" config-ref="JSON_Logger_Config" message="New account record added to database"/>
+		<choice doc:name="Choice" doc:id="c3312182-64f7-48ce-87ac-4d0f8b3e6064" >
+			<when expression="#[payload.affectedRows &gt; 0]">
+				<ee:transform doc:name="Transform Message" doc:id="193ce9bb-ace5-4bb4-aae1-e327a063c2cd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<json-logger:logger doc:name="Logger" doc:id="6473ba39-af71-435a-ba3a-7d2fbb20b55c" config-ref="JSON_Logger_Config" message="Account created - createNewRecordfFlow complete"/>
+			</when>
+			<otherwise >
+				<json-logger:logger doc:name="Logger" doc:id="873ae804-c026-4aae-bbe3-cbd3ab735d85" config-ref="JSON_Logger_Config" message="Raising APP:CREATE_ERROR error"/>
+				<raise-error doc:name='Raise "APP:CREATE_ERROR" error' doc:id="2653c0ff-51a7-45bb-9b0e-45f383f4332d" type="APP:CREATE_ERROR"/>
+			</otherwise>
+		</choice>
+	</sub-flow>
+	<sub-flow name="modifyExistingRecordFlow" doc:id="e67c0716-f424-43ee-af50-fcf0bab893b4" >
+		<json-logger:logger doc:name="Logger" doc:id="5d3bd209-d0b4-4bfc-b41c-93c636cad9b7" config-ref="JSON_Logger_Config" message="Entering modifyExistingRecordFlow" />
+		<ee:transform doc:name="Transform Message to Oracle format" doc:id="6db4c6d9-7738-4530-bf7a-db6dde617d10" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+fun convertToOracleTimestamp(d: DateTime|Null) = if (d == null) (null) else (d as String {
+	format: "yyyy-MM-dd HH:mm:ss.SSS"
+})
+---
+{
+	AccountStatus1C: payload.AccountStatus1C,
+	Address: payload.Address,
+	AddressPostalCode: payload.AddressPostalCode,
+	BillingCity: payload.BillingCity,
+	BillingCountry: payload.BillingCountry,
+	BillingCountryCode: payload.BillingCountryCode,
+	BillingPostalCode: payload.BillingPostalCode,
+	BillingState: payload.BillingState,
+	BillingStateCode: payload.BillingStateCode,
+	BillingStreet: payload.BillingStreet,
+	CharityNumberC: payload.CharityNumberC,
+	ClientBusinessGroupC: payload.ClientBusinessGroupC,
+	CreatedById: payload.CreatedById,
+	CreatedDate: convertToOracleTimestamp(payload.CreatedDate),
+	CurrencyIsoCode: payload.CurrencyIsoCode,
+	Id: payload.Id,
+	Industry: payload.Industry,
+	LastActivityDate: payload.LastActivityDate,
+	LastModifiedById: payload.LastModifiedById,
+	LastModifiedDate: convertToOracleTimestamp(payload.LastModifiedDate),
+	LastReferencedDate: convertToOracleTimestamp(payload.LastReferencedDate),
+	LastViewedDate: convertToOracleTimestamp(payload.LastViewedDate),
+	Name: payload.Name,
+	OwnerId: payload.OwnerId,
+	ParentId: payload.ParentId,
+	Phone: payload.Phone,
+	PhotoUrl: payload.PhotoUrl,
+	RecordTypeId: payload.RecordTypeId,
+	ShippingCity: payload.ShippingCity,
+	ShippingCountry: payload.ShippingCountry,
+	ShippingPostalCode: payload.ShippingPostalCode,
+	ShippingState: payload.ShippingState,
+	ShippingStreet: payload.ShippingStreet,
+	SystemModstamp: convertToOracleTimestamp(payload.SystemModstamp),
+	VATIDNumberC: payload.VATIDNumberC,
+	Website: payload.Website
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Logger" doc:id="03666c6a-0782-47f9-b63a-b8aee58422a6" config-ref="JSON_Logger_Config" message="Salesforce Account payload transformed to database-friendly format"/>
+		<db:update doc:name="Update database record" doc:id="717f01a4-acd3-419f-863b-98b95889bd4b" config-ref="Database_Config">
+			<db:sql ><![CDATA[UPDATE ATLAS_ACCOUNT SET
+ACCOUNT_STATUS1_C=:AccountStatus1C, ADDRESS=:Address, ADDRESS_POSTAL_CODE=:AddressPostalCode, BILLING_CITY=:BillingCity, BILLING_COUNTRY=:BillingCountry, BILLING_COUNTRY_CODE=:BillingCountryCode, BILLING_POSTAL_CODE=:BillingPostalCode, BILLING_STATE=:BillingState, BILLING_STATE_CODE=:BillingStateCode, BILLING_STREET=:BillingStreet, CHARITY_NUMBER_C=:CharityNumberC, CLIENT_BUSINESS_GROUP_C=:ClientBusinessGroupC, CURRENCY_ISO_CODE=:CurrencyIsoCode, INDUSTRY=:Industry, NAME=:Name, PARENT_ID=:ParentId, PHONE=:Phone, PHOTO_URL=:PhotoUrl, RECORD_TYPE_ID=:RecordTypeId, SHIPPING_CITY=:ShippingCity, SHIPPING_COUNTRY=:ShippingCountry, SHIPPING_POSTAL_CODE=:ShippingPostalCode, SHIPPING_STATE=:ShippingState, SHIPPING_STREET=:ShippingStreet, SYSTEM_MODSTAMP=:SystemModstamp, VAT_ID_NUMBER_C=:VATIDNumberC, WEBSITE=:Website, OWNER_ID=:OwnerId, CREATED_DATE=:CreatedDate, CREATED_BY_ID=:CreatedById, LAST_MODIFIED_DATE=:LastModifiedDate, LAST_MODIFIED_BY_ID=:LastModifiedById, LAST_ACTIVITY_DATE=:LastActivityDate, LAST_VIEWED_DATE=:LastViewedDate, LAST_REFERENCED_DATE=:LastReferencedDate
+WHERE ID=:Id
+]]></db:sql>
+			<db:input-parameters ><![CDATA[#[payload]]]></db:input-parameters>
+		</db:update>
+		<json-logger:logger doc:name="Logger" doc:id="3df325a5-ab01-4ffb-a5cb-270fbd44dae4" config-ref="JSON_Logger_Config" message="Database record modified"/>
+		<choice doc:name="Choice" doc:id="a57a8227-966b-4cc3-aa6b-5c9f3401e344" >
+			<when expression="#[payload.affectedRows &gt; 0]">
+				<ee:transform doc:name="Transform Message" doc:id="0eb385a2-be11-404e-ad87-71cfe9e622ac" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<json-logger:logger doc:name="Logger" doc:id="61000f3a-19e3-413b-8cf9-db6b76c7993e" config-ref="JSON_Logger_Config" message="Record updated - modifyExistingRecordfFlow complete"/>
+			</when>
+			<otherwise >
+				<json-logger:logger doc:name="Logger" doc:id="687543b3-06ae-41d7-9fc9-9d72b6e94415" config-ref="JSON_Logger_Config" message="Raising APP:MODIFY_ERROR error"/>
+				<raise-error doc:name='Raise "APP:MODIFY_ERROR" error' doc:id="00f92863-5c75-439d-8764-ce97fce3c943" type="APP:MODIFY_ERROR"/>
+			</otherwise>
+		</choice>
+	</sub-flow>
+</mule>

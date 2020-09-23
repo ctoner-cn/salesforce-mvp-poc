@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="Conde Nast Britain DWH System API"
+        prefix="conde-nast-britain-dwh-system-api"
+        namespace="http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api"
+        doc:description="cn-britain-dwh-sapi System API for creating and modifying data within the Conde Nast UK DWH"
+        xmlns="http://www.mulesoft.org/schema/mule/module"
+        xmlns:mule="http://www.mulesoft.org/schema/mule/core"
+        xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+        xmlns:http="http://www.mulesoft.org/schema/mule/http"
+        
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.mulesoft.org/schema/mule/module http://www.mulesoft.org/schema/mule/module/current/mule-module.xsd
+           http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+           
+           http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+
+    <property name="property_host" displayName="host" type="string"  summary="Host for consuming API"/>
+    <property name="property_port" displayName="port" type="string"  summary="Port for consuming API"/>
+    <property name="property_basePath" displayName="basePath" type="string" defaultValue="/" summary="Basepath for consuming API"/>
+    <property name="property_protocol" displayName="protocol" type="string"  summary="Protocol for consuming API"/>
+
+        <property name="property_proxyConfig" displayName="Proxy Config Reference" type="string" use="OPTIONAL" summary="Proxy config reference" tab="Proxy"/>
+        <property name="property_responseTimeout" displayName="Response timeout" type="string" defaultValue="10000" summary="Maximum time in milliseconds that the request element will block the execution of the flow waiting for the HTTP response."/>
+
+    
+    
+
+    <http:request-config
+name="conde-nast-britain-dwh-system-api-httpreq-config" xmlns:connection="true"
+responseTimeout="#[vars.property_responseTimeout]"
+basePath="#[vars.property_basePath]">
+<http:request-connection
+host="#[vars.property_host]"
+protocol="#[vars.property_protocol]"
+port="#[vars.property_port]"
+proxyConfig="#[vars.property_proxyConfig]"
+>
+</http:request-connection>
+</http:request-config>
+
+
+
+
+    <operation name="update-accounts"  >
+        <parameters>
+                            <parameter name="update-accounts-request-data" type="update-accounts-request-type" use="REQUIRED" role="PRIMARY" />
+                                                <parameter name="request-streaming-mode" displayName="Request streaming mode" type="request-streaming-mode-enum" use="OPTIONAL" tab="Advanced" />
+        </parameters>
+        <body>
+                <http:request config-ref="conde-nast-britain-dwh-system-api-httpreq-config"
+              path="/accounts"
+              method="PUT"
+              requestStreamingMode='#[vars["request-streaming-mode"]]'
+>
+                <mule:error-mapping sourceType="HTTP:PARSING" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:PARSING" />
+            <mule:error-mapping sourceType="HTTP:TIMEOUT" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TIMEOUT" />
+            <mule:error-mapping sourceType="HTTP:SECURITY" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SECURITY" />
+            <mule:error-mapping sourceType="HTTP:CONNECTIVITY" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:CONNECTIVITY" />
+            <mule:error-mapping sourceType="HTTP:BAD_REQUEST" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:BAD_REQUEST" />
+            <mule:error-mapping sourceType="HTTP:UNAUTHORIZED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNAUTHORIZED" />
+            <mule:error-mapping sourceType="HTTP:FORBIDDEN" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:FORBIDDEN" />
+            <mule:error-mapping sourceType="HTTP:METHOD_NOT_ALLOWED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:METHOD_NOT_ALLOWED" />
+            <mule:error-mapping sourceType="HTTP:NOT_FOUND" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_FOUND" />
+            <mule:error-mapping sourceType="HTTP:NOT_ACCEPTABLE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_ACCEPTABLE" />
+            <mule:error-mapping sourceType="HTTP:UNSUPPORTED_MEDIA_TYPE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNSUPPORTED_MEDIA_TYPE" />
+            <mule:error-mapping sourceType="HTTP:TOO_MANY_REQUESTS" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TOO_MANY_REQUESTS" />
+            <mule:error-mapping sourceType="HTTP:INTERNAL_SERVER_ERROR" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:INTERNAL_SERVER_ERROR" />
+            <mule:error-mapping sourceType="HTTP:SERVICE_UNAVAILABLE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SERVICE_UNAVAILABLE" />
+            <mule:error-mapping sourceType="HTTP:RETRY_EXHAUSTED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:RETRY_EXHAUSTED" />
+                <http:body>
+            <![CDATA[#[output application/json --- vars['update-accounts-request-data']]
+]]>
+        </http:body>
+    
+            </http:request>
+        </body>
+                    <output type="any" />
+        
+        <errors>
+                            <error type="PARSING"/>
+                            <error type="TIMEOUT"/>
+                            <error type="SECURITY"/>
+                            <error type="CONNECTIVITY"/>
+                            <error type="BAD_REQUEST"/>
+                            <error type="UNAUTHORIZED"/>
+                            <error type="FORBIDDEN"/>
+                            <error type="METHOD_NOT_ALLOWED"/>
+                            <error type="NOT_FOUND"/>
+                            <error type="NOT_ACCEPTABLE"/>
+                            <error type="UNSUPPORTED_MEDIA_TYPE"/>
+                            <error type="TOO_MANY_REQUESTS"/>
+                            <error type="INTERNAL_SERVER_ERROR"/>
+                            <error type="SERVICE_UNAVAILABLE"/>
+                            <error type="RETRY_EXHAUSTED"/>
+                    </errors>
+    </operation>
+    <operation name="create-account"  >
+        <parameters>
+                            <parameter name="create-account-request-data" type="create-account-request-type" use="REQUIRED" role="PRIMARY" />
+                                                <parameter name="request-streaming-mode" displayName="Request streaming mode" type="request-streaming-mode-enum" use="OPTIONAL" tab="Advanced" />
+        </parameters>
+        <body>
+                <http:request config-ref="conde-nast-britain-dwh-system-api-httpreq-config"
+              path="/accounts"
+              method="POST"
+              requestStreamingMode='#[vars["request-streaming-mode"]]'
+>
+                <mule:error-mapping sourceType="HTTP:PARSING" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:PARSING" />
+            <mule:error-mapping sourceType="HTTP:TIMEOUT" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TIMEOUT" />
+            <mule:error-mapping sourceType="HTTP:SECURITY" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SECURITY" />
+            <mule:error-mapping sourceType="HTTP:CONNECTIVITY" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:CONNECTIVITY" />
+            <mule:error-mapping sourceType="HTTP:BAD_REQUEST" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:BAD_REQUEST" />
+            <mule:error-mapping sourceType="HTTP:UNAUTHORIZED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNAUTHORIZED" />
+            <mule:error-mapping sourceType="HTTP:FORBIDDEN" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:FORBIDDEN" />
+            <mule:error-mapping sourceType="HTTP:METHOD_NOT_ALLOWED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:METHOD_NOT_ALLOWED" />
+            <mule:error-mapping sourceType="HTTP:NOT_FOUND" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_FOUND" />
+            <mule:error-mapping sourceType="HTTP:NOT_ACCEPTABLE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_ACCEPTABLE" />
+            <mule:error-mapping sourceType="HTTP:UNSUPPORTED_MEDIA_TYPE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNSUPPORTED_MEDIA_TYPE" />
+            <mule:error-mapping sourceType="HTTP:TOO_MANY_REQUESTS" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TOO_MANY_REQUESTS" />
+            <mule:error-mapping sourceType="HTTP:INTERNAL_SERVER_ERROR" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:INTERNAL_SERVER_ERROR" />
+            <mule:error-mapping sourceType="HTTP:SERVICE_UNAVAILABLE" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SERVICE_UNAVAILABLE" />
+            <mule:error-mapping sourceType="HTTP:RETRY_EXHAUSTED" targetType="CONDE-NAST-BRITAIN-DWH-SYSTEM-API:RETRY_EXHAUSTED" />
+                <http:body>
+            <![CDATA[#[output application/json --- vars['create-account-request-data']]
+]]>
+        </http:body>
+    
+            </http:request>
+        </body>
+                    <output type="any" />
+        
+        <errors>
+                            <error type="PARSING"/>
+                            <error type="TIMEOUT"/>
+                            <error type="SECURITY"/>
+                            <error type="CONNECTIVITY"/>
+                            <error type="BAD_REQUEST"/>
+                            <error type="UNAUTHORIZED"/>
+                            <error type="FORBIDDEN"/>
+                            <error type="METHOD_NOT_ALLOWED"/>
+                            <error type="NOT_FOUND"/>
+                            <error type="NOT_ACCEPTABLE"/>
+                            <error type="UNSUPPORTED_MEDIA_TYPE"/>
+                            <error type="TOO_MANY_REQUESTS"/>
+                            <error type="INTERNAL_SERVER_ERROR"/>
+                            <error type="SERVICE_UNAVAILABLE"/>
+                            <error type="RETRY_EXHAUSTED"/>
+                    </errors>
+    </operation>
+
+</module>

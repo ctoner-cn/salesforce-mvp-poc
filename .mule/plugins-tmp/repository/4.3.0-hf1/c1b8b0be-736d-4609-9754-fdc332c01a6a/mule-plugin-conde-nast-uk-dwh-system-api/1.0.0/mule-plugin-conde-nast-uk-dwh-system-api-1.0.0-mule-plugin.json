@@ -1,0 +1,915 @@
+{
+  "minMuleVersion": "4.1.1",
+  "extensionModel": {
+    "types": [],
+    "messageSources": [],
+    "functions": [],
+    "configurations": [{
+      "externalLibraryModels": [],
+      "operations": [
+        {
+          "displayModel": {},
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "",
+          "modelProperties": {},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {},
+                  "role": "PRIMARY_CONTENT",
+                  "defaultValue": "#[payload]",
+                  "description": "",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "json",
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingStateCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCountryCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingStreet"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingPostalCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCountry"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingState"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCity"}
+                      }
+                    ],
+                    "open": {"type": "Any"}
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "create-account-request-data",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "General",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Request streaming mode"},
+                  "role": "BEHAVIOUR",
+                  "description": "",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "json",
+                    "annotations": {"enum": {
+                      "values": [
+                        "AUTO",
+                        "NEVER",
+                        "ALWAYS"
+                      ],
+                      "type": "[Ljava.lang.String;"
+                    }},
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "request-streaming-mode",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "role": "BEHAVIOUR",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+                    "type": "CONFIG"
+                  }],
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"},
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "isComponentId": false,
+                  "expressionSupport": "NOT_SUPPORTED"
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Output",
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Target Variable"},
+                  "role": "BEHAVIOUR",
+                  "description": "The name of a variable on which the operation's output will be placed",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "target",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Target Value"},
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "#[payload]",
+                  "description": "An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "REQUIRED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "targetValue",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Any"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": false,
+          "requiresConnection": false,
+          "blocking": true,
+          "name": "create-account",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+            "type": "CREATE-ACCOUNT"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:CONNECTIVITY",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_FOUND",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNAUTHORIZED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SECURITY",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SERVICE_UNAVAILABLE",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:BAD_REQUEST",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:FORBIDDEN",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNSUPPORTED_MEDIA_TYPE",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:METHOD_NOT_ALLOWED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:INTERNAL_SERVER_ERROR",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:RETRY_EXHAUSTED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TOO_MANY_REQUESTS",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TIMEOUT",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:PARSING",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_ACCEPTABLE"
+          ]
+        },
+        {
+          "displayModel": {},
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "",
+          "modelProperties": {},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {},
+                  "role": "PRIMARY_CONTENT",
+                  "defaultValue": "#[payload]",
+                  "description": "",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "json",
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingStateCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCountryCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingStreet"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingPostalCode"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCountry"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingState"}
+                      },
+                      {
+                        "model": {"type": "String"},
+                        "key": {"name": "billingCity"}
+                      }
+                    ],
+                    "open": {"type": "Any"}
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "update-accounts-request-data",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "General",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Request streaming mode"},
+                  "role": "BEHAVIOUR",
+                  "description": "",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "json",
+                    "annotations": {"enum": {
+                      "values": [
+                        "AUTO",
+                        "NEVER",
+                        "ALWAYS"
+                      ],
+                      "type": "[Ljava.lang.String;"
+                    }},
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "request-streaming-mode",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "role": "BEHAVIOUR",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+                    "type": "CONFIG"
+                  }],
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"},
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "isComponentId": false,
+                  "expressionSupport": "NOT_SUPPORTED"
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Output",
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Target Variable"},
+                  "role": "BEHAVIOUR",
+                  "description": "The name of a variable on which the operation's output will be placed",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "target",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Target Value"},
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "#[payload]",
+                  "description": "An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "REQUIRED",
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "targetValue",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Any"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": false,
+          "requiresConnection": false,
+          "blocking": true,
+          "name": "update-accounts",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+            "type": "UPDATE-ACCOUNTS"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:CONNECTIVITY",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_FOUND",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNAUTHORIZED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SECURITY",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:SERVICE_UNAVAILABLE",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:BAD_REQUEST",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:FORBIDDEN",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:UNSUPPORTED_MEDIA_TYPE",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:METHOD_NOT_ALLOWED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:INTERNAL_SERVER_ERROR",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:RETRY_EXHAUSTED",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TOO_MANY_REQUESTS",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:TIMEOUT",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:PARSING",
+            "CONDE-NAST-BRITAIN-DWH-SYSTEM-API:NOT_ACCEPTABLE"
+          ]
+        }
+      ],
+      "messageSources": [],
+      "name": "config",
+      "description": "",
+      "modelProperties": {},
+      "stereotype": {
+        "parent": {
+          "namespace": "MULE",
+          "type": "MODULE_CONFIG"
+        },
+        "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+        "type": "CONFIG"
+      },
+      "parameterGroupModels": [{
+        "name": "General",
+        "description": "",
+        "modelProperties": {},
+        "parameters": [
+          {
+            "displayModel": {
+              "summary": "Host for consuming API",
+              "displayName": "host"
+            },
+            "role": "BEHAVIOUR",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": true,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_host",
+            "layoutModel": {
+              "password": false,
+              "tabName": "General",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          },
+          {
+            "displayModel": {
+              "summary": "Port for consuming API",
+              "displayName": "port"
+            },
+            "role": "BEHAVIOUR",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": true,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_port",
+            "layoutModel": {
+              "password": false,
+              "tabName": "General",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          },
+          {
+            "displayModel": {
+              "summary": "Basepath for consuming API",
+              "displayName": "basePath"
+            },
+            "role": "BEHAVIOUR",
+            "defaultValue": "/",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": false,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_basePath",
+            "layoutModel": {
+              "password": false,
+              "tabName": "General",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          },
+          {
+            "displayModel": {
+              "summary": "Protocol for consuming API",
+              "displayName": "protocol"
+            },
+            "role": "BEHAVIOUR",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": true,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_protocol",
+            "layoutModel": {
+              "password": false,
+              "tabName": "General",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          },
+          {
+            "displayModel": {
+              "summary": "Proxy config reference",
+              "displayName": "Proxy Config Reference"
+            },
+            "role": "BEHAVIOUR",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": false,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_proxyConfig",
+            "layoutModel": {
+              "password": false,
+              "tabName": "Proxy",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [{
+              "namespace": "HTTP",
+              "type": "HTTP_PROXY_CONFIG"
+            }],
+            "isComponentId": false
+          },
+          {
+            "displayModel": {
+              "summary": "Maximum time in milliseconds that the request element will block the execution of the flow waiting for the HTTP response.",
+              "displayName": "Response timeout"
+            },
+            "role": "BEHAVIOUR",
+            "defaultValue": "10000",
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": false,
+            "expressionSupport": "SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "property_responseTimeout",
+            "layoutModel": {
+              "password": false,
+              "tabName": "General",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          },
+          {
+            "role": "BEHAVIOUR",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "name",
+            "description": "The identifier of this element used to reference it in other components",
+            "modelProperties": {},
+            "allowedStereotypeModels": [],
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": true,
+            "isComponentId": true,
+            "expressionSupport": "NOT_SUPPORTED"
+          },
+          {
+            "role": "BEHAVIOUR",
+            "description": "Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.",
+            "modelProperties": {
+              "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 4},
+              "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                "localPart": "expiration-policy",
+                "prefix": "mule",
+                "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+              }}
+            },
+            "type": {
+              "format": "java",
+              "annotations": {
+                "typeDsl": {
+                  "allowTopLevelDefinition": false,
+                  "allowInlineDefinition": true
+                },
+                "description": {"value": "Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit."},
+                "typeId": "org.mule.runtime.extension.api.runtime.ExpirationPolicy"
+              },
+              "type": "Object",
+              "fields": [
+                {
+                  "annotations": {
+                    "description": {"value": "A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration"},
+                    "expressionSupport": {"value": "NOT_SUPPORTED"}
+                  },
+                  "model": {
+                    "annotations": {
+                      "default": "5",
+                      "classInformation": {
+                        "implementedInterfaces": ["java.lang.Comparable"],
+                        "parent": "java.lang.Number",
+                        "classname": "java.lang.Long",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "int": {}
+                    },
+                    "type": "Number"
+                  },
+                  "key": {"name": "maxIdleTime"}
+                },
+                {
+                  "annotations": {
+                    "description": {"value": "A time unit that qualifies the maxIdleTime attribute"},
+                    "expressionSupport": {"value": "NOT_SUPPORTED"}
+                  },
+                  "model": {
+                    "annotations": {
+                      "default": "MINUTES",
+                      "enum": {
+                        "values": [
+                          "NANOSECONDS",
+                          "MICROSECONDS",
+                          "MILLISECONDS",
+                          "SECONDS",
+                          "MINUTES",
+                          "HOURS",
+                          "DAYS"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "key": {"name": "timeUnit"}
+                }
+              ]
+            },
+            "required": false,
+            "expressionSupport": "NOT_SUPPORTED",
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": true,
+              "allowsReferences": false
+            },
+            "name": "expirationPolicy",
+            "layoutModel": {
+              "password": false,
+              "tabName": "Advanced",
+              "query": false,
+              "text": false
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          }
+        ],
+        "exclusiveParametersModels": [],
+        "showInDsl": false
+      }],
+      "connectionProviders": [{
+        "externalLibraryModels": [],
+        "connectionManagementType": "NONE",
+        "supportsConnectivityTesting": true,
+        "name": "connection",
+        "description": "",
+        "modelProperties": {},
+        "stereotype": {
+          "parent": {
+            "namespace": "MULE",
+            "type": "CONNECTION"
+          },
+          "namespace": "CONDE-NAST-BRITAIN-DWH-SYSTEM-API",
+          "type": "CONNECTION"
+        },
+        "parameterGroupModels": []
+      }]
+    }],
+    "externalLibraries": [],
+    "description": "cn-britain-dwh-sapi System API for creating and modifying data within the Conde Nast UK DWH",
+    "resources": [],
+    "subTypes": [],
+    "modelProperties": {"org.mule.runtime.extension.api.property.XmlExtensionModelProperty": {"namespacesDependencies": [
+      "http://www.mulesoft.org/schema/mule/documentation",
+      "http://www.mulesoft.org/schema/mule/http",
+      "http://www.w3.org/2001/XMLSchema-instance",
+      "http://www.mulesoft.org/schema/mule/core"
+    ]}},
+    "constructs": [],
+    "connectionProviders": [],
+    "version": "4.0.0",
+    "privilegedArtifacts": [],
+    "importedTypes": [],
+    "xmlDsl": {
+      "schemaVersion": "4.0.0",
+      "prefix": "conde-nast-britain-dwh-system-api",
+      "schemaLocation": "http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api/current/mule-conde-nast-britain-dwh-system-api.xsd",
+      "namespace": "http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api",
+      "xsdFileName": "mule-conde-nast-britain-dwh-system-api.xsd"
+    },
+    "operations": [],
+    "vendor": "MuleSoft",
+    "name": "Conde Nast Britain DWH System API",
+    "privilegedPackages": [],
+    "category": "COMMUNITY",
+    "notifications": [],
+    "errors": []
+  }
+}

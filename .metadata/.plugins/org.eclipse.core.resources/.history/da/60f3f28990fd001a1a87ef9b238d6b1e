@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:conde-nast-britain-dwh-system-api="http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api/current/mule-conde-nast-britain-dwh-system-api.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	<flow name="onModifiedObjectFlow" doc:id="44e06fec-6055-4150-9dfa-748c75b0a173" >
+		<salesforce:modified-object-listener doc:name="On Modified Object" doc:id="e2d8ee8d-6c69-4bd4-a6c4-2fa0a8d30f41" config-ref="Salesforce_Config" objectType="Account">
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</salesforce:modified-object-listener>
+		<ee:transform doc:name="Transform Message" doc:id="9748baec-13f8-484d-9bc8-68f036ea2942" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<choice doc:name="Choice" doc:id="99b2ccd7-bf7d-46ee-80dc-571e94453cff" >
+			<when expression='#[payload.isModified__c=="true"]'>
+				<json-logger:logger doc:name="Logger" doc:id="581b4b71-47b6-4ecc-a13d-6cec766f850b" config-ref="JSON_Logger_Config" message="On modified object - triggered" />
+				<conde-nast-britain-dwh-system-api:update-accounts doc:name="Update accounts" doc:id="eba0bd74-92c2-4ea2-b74a-97e777a3a789" config-ref="Conde_Nast_Britain_DWH_System_API_Config" />
+			</when>
+			<otherwise >
+				<json-logger:logger doc:name="Logger" doc:id="2fdc85d3-5ba5-4dde-9860-e7a27c25a3d2" config-ref="JSON_Logger_Config" message="New object - triggered" />
+				<conde-nast-britain-dwh-system-api:create-account doc:name="Create account" doc:id="5d45b7a3-120a-4203-ad4d-3dad6a72e8e0" config-ref="Conde_Nast_Britain_DWH_System_API_Config"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>

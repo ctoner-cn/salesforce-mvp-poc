@@ -1,0 +1,34 @@
+{
+  "configs": [
+    "impl/cn-britain-dwh-sapi-impl.xml",
+    "global/global.xml",
+    "cn-britain-dwh-sapi.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:cn-britain-uk-dwh-sapi:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "log4j2.xml",
+        "impl/cn-britain-dwh-sapi-impl.xml",
+        "cn-britain-dwh-sapi.xml",
+        "application-types.xml",
+        "properties/properties.yaml",
+        "examples/salesforce-input-example.json",
+        "api/types/account.raml",
+        "api/cn-britain-dwh-sapi.raml",
+        "api/examples/account-example.raml",
+        "global/global.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

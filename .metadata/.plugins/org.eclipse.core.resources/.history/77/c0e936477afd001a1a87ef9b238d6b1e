@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="testFlow" doc:id="aadb92ca-419e-4dbc-8b13-3a51232d282f" >
+		<json-logger:logger doc:name="Logger" doc:id="4b10cfee-d44c-4a24-8883-a2fa0360e02a" config-ref="JSON_Logger_Config" message="Entering testFlow"/>
+		<ee:transform doc:name="Transform Message" doc:id="6e533c8b-3516-491f-8e42-fb691d61df5e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+fun convertToOracleTimestamp(d: DateTime|Null) = if (d == null) (null) else (d as String {
+	format: "yyyy-MM-dd HH:mm:ss.SSS"
+})
+---
+{
+	AccountStatus1C: payload.AccountStatus1C,
+	Address: payload.Address,
+	AddressPostalCode: payload.AddressPostalCode,
+	BillingCity: payload.BillingCity,
+	BillingCountry: payload.BillingCountry,
+	BillingCountryCode: payload.BillingCountryCode,
+	BillingPostalCode: payload.BillingPostalCode,
+	BillingState: payload.BillingState,
+	BillingStateCode: payload.BillingStateCode,
+	BillingStreet: payload.BillingStreet,
+	CharityNumberC: payload.CharityNumberC,
+	ClientBusinessGroupC: payload.ClientBusinessGroupC,
+	CreatedById: payload.CreatedById,
+	CreatedDate: convertToOracleTimestamp(payload.CreatedDate),
+	CurrencyIsoCode: payload.CurrencyIsoCode,
+	Id: payload.Id,
+	Industry: payload.Industry,
+	LastActivityDate: payload.LastActivityDate,
+	LastModifiedById: payload.LastModifiedById,
+	LastModifiedDate: convertToOracleTimestamp(payload.LastModifiedDate),
+	LastReferencedDate: convertToOracleTimestamp(payload.LastReferencedDate),
+	LastViewedDate: convertToOracleTimestamp(payload.LastViewedDate),
+	Name: payload.Name,
+	OwnerId: payload.OwnerId,
+	ParentId: payload.ParentId,
+	Phone: payload.Phone,
+	PhotoUrl: payload.PhotoUrl,
+	RecordTypeId: payload.RecordTypeId,
+	ShippingCity: payload.ShippingCity,
+	ShippingCountry: payload.ShippingCountry,
+	ShippingPostalCode: payload.ShippingPostalCode,
+	ShippingState: payload.ShippingState,
+	ShippingStreet: payload.ShippingStreet,
+	SystemModstamp: convertToOracleTimestamp(payload.SystemModstamp),
+	VATIDNumberC: payload.VATIDNumberC,
+	Website: payload.Website
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Logger" doc:id="7288e06e-26c5-439b-8e9a-98b766c6e3fb" config-ref="JSON_Logger_Config" message="Exiting transform message"/>
+	</sub-flow>
+</mule>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogs xmlns="http://www.mulesoft.org/schema/mule/types" >
+
+                <catalog name="update-accounts-request-type" format="application/json">
+        <schema format="application/json+schema" location="./update-accounts-request-data-schema.json" />
+    </catalog>
+        
+        
+                        <catalog name="create-account-request-type" format="application/json">
+        <schema format="application/json+schema" location="./create-account-request-data-schema.json" />
+    </catalog>
+        
+        
+            
+    
+    <catalog name="request-streaming-mode-enum" format="application/json">
+        <schema format="application/json+schema" location="./request-streaming-mode-enum.json" />
+    </catalog>
+
+</catalogs>

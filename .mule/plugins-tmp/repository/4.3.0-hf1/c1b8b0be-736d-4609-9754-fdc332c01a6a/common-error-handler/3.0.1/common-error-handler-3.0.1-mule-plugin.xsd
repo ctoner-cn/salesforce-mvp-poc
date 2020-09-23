@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mulesoft.org/schema/mule/error-handler-plugin" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"></xs:import>
+  <xs:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans.xsd"></xs:import>
+  <xs:import namespace="http://www.mulesoft.org/schema/mule/core" schemaLocation="http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></xs:import>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/error-handler-plugin" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="On-errorType" substitutionGroup="mule:abstract-operator" name="on-error"></xs:element>
+  <xs:complexType name="On-errorType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractOperatorType">
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element type="xs:string" minOccurs="0" maxOccurs="1" name="error"></xs:element>
+        </xs:sequence>
+        <xs:attribute type="xs:string" use="optional" default="#[vars.errorDetails default []]" name="previousErrors"></xs:attribute>
+        <xs:attribute type="xs:string" use="optional" default="#[p('api.name')]" name="apiName"></xs:attribute>
+        <xs:attribute type="xs:string" use="optional" default="#[p('api.version')]" name="apiVersion"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="There was an issue with your request message." name="badRequestError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="You have issues accessing the system" name="unauthorizedError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="The API has not been implemented" name="notFoundError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="One of the request or parameters is unacceptable" name="notAcceptableError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="You request to the server has been timed-out" name="timeoutError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="Media Type not supported" name="unsupportedMediaTypeError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="You have made too many requests to the server" name="tooManyRequestsError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="There is a server issue" name="serverError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="The method has not been implemented" name="methodNotAllowedError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="You have issues accessing the system" name="connectivityError"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="#[correlationId]" name="correlationId"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" name="errorTypes"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" name="errorCodes"></xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" name="errorMessages"></xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="target">
+          <xs:annotation>
+            <xs:documentation>The name of a variable on which the operation's output will be placed</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="mule:expressionString" use="optional" default="#[payload]" name="targetValue">
+          <xs:annotation>
+            <xs:documentation>An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

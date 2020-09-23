@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:conde-nast-britain-dwh-system-api="http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api http://www.mulesoft.org/schema/mule/conde-nast-britain-dwh-system-api/current/mule-conde-nast-britain-dwh-system-api.xsd">
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="f20fa5cf-8adc-46a0-bdb5-47633b69caf8" >
+		<salesforce:oauth-user-pass-connection consumerKey="3MVG9Lf04EwncL7kzHpbn9XUvRxiSCA8iIPVDkvSmzlTkV_OYzTwnDtbl7QPOFqVmAPaLjL1PhQ==" consumerSecret="5F4CA60E39069C3CCF34FFBC93FA41B23AD95F2C128275BB5C1018019B1C9F5A" username="caitlin.toner@condenast.com.mulesoft" password="Funkys193" securityToken="DuNbhAhE5U3oDZhayDohtXNJ" tokenEndpoint="https://test.salesforce.com/services/oauth2/token" />
+	</salesforce:sfdc-config>
+	<conde-nast-britain-dwh-system-api:config name="Conde_Nast_Britain_DWH_System_API_Config" doc:name="Conde Nast Britain DWH System API Config" doc:id="da4aa29c-3b4c-48e9-8250-2110ab9d66f8" property_host="cn-britain-uk-dwh-sapi.uk-e1.cloudhub.io" property_port="80" property_protocol="HTTP" property_basePath="/api"/>
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="a6b292d1-c173-4f75-bf23-88d8c81b25b2" applicationName="${application.name}" applicationVersion="${application.version}" environment="${mule.dev}" />
+	<configuration-properties doc:name="Configuration properties" doc:id="8dacf6f3-1321-40bb-968a-8e0c9d42caa9" file="properties/properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="6fd86441-5e63-4c17-a029-05171721a05e" name="mule.env" value="prototype" />
+	</mule>

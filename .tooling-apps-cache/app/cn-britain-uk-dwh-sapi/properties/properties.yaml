@@ -1,0 +1,4 @@
+application:
+  name:         "cn-britain-dwh-sapi"
+  version:      "1.0.0"
+  layer:        "sapi"

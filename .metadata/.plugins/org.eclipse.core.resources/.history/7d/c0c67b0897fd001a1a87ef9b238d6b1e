@@ -1,0 +1,5 @@
+application:
+  name:         "cn-salesforce-account-eapi"
+  version:      "1.0.0"
+  layer:        "eapi"
+environment:    "${mule.env}"
